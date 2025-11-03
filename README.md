@@ -41,9 +41,10 @@ GitHub Push  ➜  Jenkins Build Trigger (via Webhook)
               ➜  Container Deployment (via Docker Compose)
               ➜  Running ToDo App on AWS EC2
 ```
+---
 
-⚙️ Setup & Installation
-🐧 On Local Machine / EC2
+## ⚙️ Setup & Installation
+## 🐧 On Local Machine / EC2
 
 Clone the repo
 ```text
