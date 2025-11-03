@@ -1,49 +1,42 @@
-🚀 To-Do App with CI/CD Pipeline using Jenkins, Docker & AWS EC2
-🧩 Project Overview
+<h1 align="center">🧩 ToDo CI/CD Pipeline</h1>
 
-This project demonstrates a complete CI/CD pipeline for a simple Node.js To-Do application.
-The pipeline automates the entire workflow — from code commit to deployment — using Jenkins, Docker, Docker Hub, and AWS EC2.
+<p align="center">
+  <img src="https://img.shields.io/badge/CI/CD-Jenkins-blue?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Docker-Containerized-orange?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/AWS-Deployed-success?style=for-the-badge"/>
+  <img src="https://img.shields.io/badge/Node.js-App-green?style=for-the-badge"/>
+</p>
 
-🏗️ Project Architecture
-GitHub Repo  →  Jenkins (EC2)  →  Docker Image Build  →  Docker Hub Push  →  Docker-Compose Deploy (EC2)
+<p align="center">
+  A fully automated <b>CI/CD Pipeline</b> for a Node.js ToDo Application using <b>Jenkins, Docker, and AWS EC2</b>.
+</p>
 
+---
 
-Tech Stack:
+## 🚀 Project Overview
 
-Frontend / Backend: Node.js
+This project demonstrates a **two-tier CI/CD pipeline** setup for a simple ToDo web app.  
+The pipeline automates the entire process — from **Git commit → Jenkins Build → Docker Image → Deployment** — all hosted on an AWS EC2 instance.
 
-Containerization: Docker
+---
 
-Orchestration: Docker Compose
+## 🧠 Tech Stack
 
-CI/CD: Jenkins
+| Layer | Tool / Technology |
+|-------|-------------------|
+| Frontend | HTML, CSS, EJS (Node.js Templates) |
+| Backend | Node.js, Express.js |
+| Containerization | Docker, Docker Compose |
+| CI/CD | Jenkins |
+| Deployment | AWS EC2 |
+| Version Control | Git & GitHub |
 
-Hosting: AWS EC2
+---
 
-Version Control: GitHub
+## 🏗️ Pipeline Flow
 
-⚙️ CI/CD Pipeline Flow
-
-Developer pushes code to GitHub repository
-
-GitHub Webhook triggers Jenkins automatically
-
-Jenkins Pipeline performs:
-
-Clones the repository
-
-Builds Docker image
-
-Pushes image to Docker Hub
-
-Deploys container via Docker Compose on EC2
-
-The app becomes available via EC2 public IP
-
-🧰 Tools & Technologies Used
-Tool	Purpose
-Jenkins	CI/CD automation
-Docker	Containerization of the Node.js app
-Docker Hub	Image registry for deployment
-AWS EC2	Server to host Jenkins and containers
-GitHub Webhooks	Automated build triggers# todo-cicd-pipeline
+```text
+GitHub Push  ➜  Jenkins Build Trigger (via Webhook)
+              ➜  Docker Build & Push (Local/ECR)
+              ➜  Container Deployment (via Docker Compose)
+              ➜  Running ToDo App on AWS EC2
