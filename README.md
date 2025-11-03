@@ -59,5 +59,5 @@ docker-compose up -d
 
 Access the app
 ```text
-http://<your-ec2-public-ip>:5000
+http://<your-ec2-public-ip>:8000
 ```
