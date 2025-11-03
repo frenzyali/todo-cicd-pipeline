@@ -40,3 +40,22 @@ GitHub Push  ➜  Jenkins Build Trigger (via Webhook)
               ➜  Docker Build & Push (Local/ECR)
               ➜  Container Deployment (via Docker Compose)
               ➜  Running ToDo App on AWS EC2
+
+
+⚙️ Setup & Installation
+🐧 On Local Machine / EC2
+
+Clone the repo
+
+git clone https://github.com/frenzyali/todo-cicd-pipeline.git
+cd todo-cicd-pipeline
+
+
+Run the containers
+
+docker-compose up -d
+
+
+Access the app
+
+http://<your-ec2-public-ip>:8000
