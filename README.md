@@ -24,8 +24,7 @@ The pipeline automates the entire process — from **Git commit → Jenkins Buil
 
 | Layer | Tool / Technology |
 |-------|-------------------|
-| Frontend | HTML, CSS, EJS (Node.js Templates) |
-| Backend | Node.js, Express.js |
+| Application Development | Node.js (Express.js, EJS Templates) |
 | Containerization | Docker, Docker Compose |
 | CI/CD | Jenkins |
 | Deployment | AWS EC2 |
