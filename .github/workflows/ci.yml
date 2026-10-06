@@ -1,0 +1,42 @@
+name: ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  hadolint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: Dockerfile
+          failure-threshold: error
+
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      # The Dockerfile runs `npm run test`, so a successful build means the tests passed
+      - name: Build image (runs tests)
+        run: docker build -t todo-app-cicd:ci .
+      - name: Smoke test
+        run: |
+          docker run -d --name todo -p 8000:8000 todo-app-cicd:ci
+          for i in $(seq 1 15); do
+            curl -sfL http://localhost:8000/todo > /dev/null && exit 0
+            sleep 2
+          done
+          docker logs todo
+          exit 1
+      - name: Trivy image scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: todo-app-cicd:ci
+          severity: HIGH,CRITICAL
+          exit-code: "0" # report-only; the Node 12 base image is end-of-life

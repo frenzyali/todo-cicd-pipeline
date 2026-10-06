@@ -1,0 +1,4 @@
+package-lock.json linguist-generated
+Jenkinsfile linguist-language=Groovy
+# Show the compose file in the language bar (YAML is hidden by default)
+*.yaml linguist-detectable=true

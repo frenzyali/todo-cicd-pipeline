@@ -18,9 +18,9 @@ pipeline {
             steps{
                 echo "Pushing the image to Docker hub"
                 withCredentials([usernamePassword(credentialsId:"docker-hub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
-                sh "docker tag todo-app-cicd ${env.dockerHubUser}/todo-app-cicd:latest"    
-                sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPass}"
-                sh "docker push ${env.dockerHubUser}/todo-app-cicd:latest"
+                sh 'docker tag todo-app-cicd "$dockerHubUser/todo-app-cicd:latest"'
+                sh 'echo "$dockerHubPass" | docker login -u "$dockerHubUser" --password-stdin'
+                sh 'docker push "$dockerHubUser/todo-app-cicd:latest"'
                 }
             }
         }
