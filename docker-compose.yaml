@@ -2,6 +2,6 @@ version: '3.9'
 
 services:
   web:
-    image: alihussain312008/todo-app-cicd:latest
+    image: alihussain312008/todo-app-cicd:${TAG:-latest}
     ports:
       - "8000:8000"

@@ -19,15 +19,17 @@ pipeline {
                 echo "Pushing the image to Docker hub"
                 withCredentials([usernamePassword(credentialsId:"docker-hub",passwordVariable:"dockerHubPass",usernameVariable:"dockerHubUser")]){
                 sh 'docker tag todo-app-cicd "$dockerHubUser/todo-app-cicd:latest"'
+                sh 'docker tag todo-app-cicd "$dockerHubUser/todo-app-cicd:$(git rev-parse --short HEAD)"'
                 sh 'echo "$dockerHubPass" | docker login -u "$dockerHubUser" --password-stdin'
                 sh 'docker push "$dockerHubUser/todo-app-cicd:latest"'
+                sh 'docker push "$dockerHubUser/todo-app-cicd:$(git rev-parse --short HEAD)"'
                 }
             }
         }
         stage("deploy"){
             steps{
                 echo "Deploying the container"
-                sh "docker-compose down && docker-compose up -d"
+                sh 'export TAG="$(git rev-parse --short HEAD)" && docker-compose down && docker-compose up -d'
             }
         }
     }

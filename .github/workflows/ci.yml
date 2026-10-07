@@ -24,7 +24,9 @@ jobs:
       - uses: actions/checkout@v4
       # The Dockerfile runs `npm run test`, so a successful build means the tests passed
       - name: Build image (runs tests)
-        run: docker build -t todo-app-cicd:ci .
+        run: |
+          docker build -t todo-app-cicd:ci .
+          docker tag todo-app-cicd:ci "todo-app-cicd:${GITHUB_SHA::7}"
       - name: Smoke test
         run: |
           docker run -d --name todo -p 8000:8000 todo-app-cicd:ci

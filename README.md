@@ -59,6 +59,7 @@ Update the `docker-compose.yaml` image name and the repo URL in the `Jenkinsfile
 
 - **Tests gate the image.** `npm run test` is a Dockerfile step, so an image that fails its tests never gets built, let alone pushed.
 - **Credentials stay in Jenkins.** The Docker Hub login uses `withCredentials` and `--password-stdin`, so the token never appears in the repo, the command line or the process list.
+- **Images are tagged with the short git SHA as well as `latest`.** The deploy step runs the SHA tag, so every deploy is traceable to a commit and a rollback is just redeploying an earlier tag.
 - **Compose for deploys.** `docker-compose down && up -d` is the simplest way to roll a single container on one host; the trade-off is a short outage per deploy.
 - **Separate CI on GitHub Actions.** It builds and smoke-tests the image and scans it with hadolint and Trivy on every push and PR, independent of the Jenkins host.
 - **Trivy is report-only.** Findings are surfaced without blocking the build.
