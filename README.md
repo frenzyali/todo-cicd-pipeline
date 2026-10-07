@@ -25,7 +25,7 @@ flowchart LR
 |---|---|
 | App | Node.js, Express 4, EJS, `sanitizer` for HTML escaping |
 | Tests | Mocha, Chai |
-| Packaging | Docker (`node:12.2.0-alpine`), Docker Compose |
+| Packaging | Docker (`node:24.21.0-alpine`), Docker Compose |
 | CD | Jenkins declarative pipeline, Docker Hub |
 | Hosting | AWS EC2 |
 | Checks | GitHub Actions: hadolint, image build + smoke test, Trivy |
@@ -61,14 +61,12 @@ Update the `docker-compose.yaml` image name and the repo URL in the `Jenkinsfile
 - **Credentials stay in Jenkins.** The Docker Hub login uses `withCredentials` and `--password-stdin`, so the token never appears in the repo, the command line or the process list.
 - **Compose for deploys.** `docker-compose down && up -d` is the simplest way to roll a single container on one host; the trade-off is a short outage per deploy.
 - **Separate CI on GitHub Actions.** It builds and smoke-tests the image and scans it with hadolint and Trivy on every push and PR, independent of the Jenkins host.
-- **Trivy is report-only.** The base image is end-of-life, so a blocking scan would be red from day one.
+- **Trivy is report-only.** Findings are surfaced without blocking the build.
 
 ## Known limitations
 
-- Base image `node:12.2.0-alpine` is end-of-life and carries known vulnerabilities. Upgrading also means updating Mocha 6 and the other pinned dependencies.
 - `test.js` only asserts arithmetic; it does not exercise the app's routes. The pipeline's test gate is therefore weak.
 - Items are stored in memory, so they are lost whenever the container restarts.
-- The image is tagged only `latest`, so rollbacks mean rebuilding.
 - `docker-compose.yaml` still has the obsolete `version:` key, which newer Compose versions ignore with a warning.
 
 ## Cleanup

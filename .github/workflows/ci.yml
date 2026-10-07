@@ -39,4 +39,4 @@ jobs:
         with:
           image-ref: todo-app-cicd:ci
           severity: HIGH,CRITICAL
-          exit-code: "0" # report-only; the Node 12 base image is end-of-life
+          exit-code: "0" # report-only
